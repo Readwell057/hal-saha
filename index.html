@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Halısaha Kadro Kurucu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Halısaha Kadro Kurucu</h1>
+    <p>Gelenleri işaretle, puanlara göre dengeli iki takım ve saha dizilişi otomatik kurulsun.</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel players" aria-labelledby="h-players">
+      <div class="panel-head">
+        <h2 id="h-players">Oyuncular</h2>
+        <div class="bulk">
+          <button type="button" class="ghost" id="allIn">Hepsini işaretle</button>
+          <button type="button" class="ghost" id="allOut">İşaretleri kaldır</button>
+        </div>
+      </div>
+
+      <form id="addForm" class="add">
+        <input id="newName" type="text" placeholder="Yeni oyuncu adı" maxlength="24" autocomplete="off" required aria-label="Yeni oyuncu adı">
+        <label class="chk"><input type="checkbox" id="newGk"> Kaleci</label>
+        <button type="submit" class="solid sm">Oyuncu ekle</button>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" class="c-in">Geliyor</th>
+              <th scope="col" class="c-name">Oyuncu</th>
+              <th scope="col" class="c-gk">Kaleci</th>
+              <th scope="col" title="Hücum puanı (1-5)">Hücum</th>
+              <th scope="col" title="Oyun kurma puanı (1-5)">Orta</th>
+              <th scope="col" title="Savunma puanı (1-5)">Defans</th>
+              <th scope="col" title="Kaleci puanı (1-5)">Kaleci P.</th>
+              <th scope="col"><span class="sr">Sil</span></th>
+            </tr>
+          </thead>
+          <tbody id="playerBody"></tbody>
+        </table>
+      </div>
+      <p class="hint">Puanlar 1 ile 5 arasındadır. Kaleci işaretli oyuncularda yalnızca kaleci puanı kullanılır.</p>
+    </section>
+
+    <aside class="panel match" aria-labelledby="h-match">
+      <h2 id="h-match">Bu maç</h2>
+
+      <div class="stats">
+        <div class="stat"><strong id="stField">0</strong><span>Gelen oyuncu</span></div>
+        <div class="stat"><strong id="stGk">0</strong><span>Gelen kaleci</span></div>
+        <div class="stat"><strong id="stTotal">0</strong><span>Toplam gelen</span></div>
+      </div>
+
+      <div class="field-row">
+        <span id="lblPer">Takım başına saha oyuncusu</span>
+        <div class="stepper" role="group" aria-labelledby="lblPer">
+          <button type="button" id="perMinus" aria-label="Azalt">−</button>
+          <output id="perVal">6</output>
+          <button type="button" id="perPlus" aria-label="Artır">+</button>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <span>Forma renkleri</span>
+        <div class="colors">
+          <label><input type="color" id="color1" aria-label="Takım 1 forma rengi"></label>
+          <label><input type="color" id="color2" aria-label="Takım 2 forma rengi"></label>
+        </div>
+      </div>
+
+      <p id="statusLine" class="status" role="status"></p>
+      <button type="button" class="solid big" id="createBtn">Takımları oluştur</button>
+    </aside>
+  </main>
+
+  <section class="teams-section" aria-labelledby="h-teams">
+    <div class="panel-head wide">
+      <h2 id="h-teams">Kadrolar</h2>
+      <div class="team-tools" id="teamTools" hidden>
+        <label class="inline">Diziliş
+          <select id="formationSel"></select>
+        </label>
+        <button type="button" class="ghost" id="reBtn">Yeniden oluştur</button>
+        <button type="button" class="ghost" id="copyBtn">Sonucu kopyala</button>
+      </div>
+    </div>
+    <p id="toast" class="toast" role="status" aria-live="polite"></p>
+    <div id="teams" class="teams"></div>
+  </section>
+
+  <footer class="foot">Oyuncu listen bu tarayıcıda saklanır. Hiçbir veri sunucuya gönderilmez.</footer>
+
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
